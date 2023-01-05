@@ -1,0 +1,8 @@
+{
+    "links":[
+        ["index","index.html"],
+        ["01-color-switcher","01-color-switcher.html"],
+        ["02-timer","02-timer.html"],
+        ["03-promises","03-promises.html"]
+    ]
+}
