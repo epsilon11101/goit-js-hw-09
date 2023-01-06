@@ -42,13 +42,17 @@ function getMS(today, future) {
   return seconds * 1000;
 }
 
+function setNumberDate(str) {
+  return str.toString().length < 2 ? `0${str}` : str;
+}
+
 function timer_counter() {
   const timer = setInterval(() => {
     const count_down = convertMs((_ms -= 1000));
-    time.sec.innerText = count_down.seconds;
-    time.min.innerText = count_down.minutes;
-    time.hour.innerText = count_down.hours;
-    time.day.innerText = count_down.days;
+    time.sec.innerText = setNumberDate(count_down.seconds);
+    time.min.innerText = setNumberDate(count_down.minutes);
+    time.hour.innerText = setNumberDate(count_down.hours);
+    time.day.innerText = setNumberDate(count_down.days);
 
     if (_ms <= 0) clearTimeout(timer);
   }, 1000);
@@ -63,18 +67,14 @@ const options = {
     const date = selectedDates[0];
     const today = new Date();
 
-    if (
-      date.getDate() > today.getDate() &&
-      date.getMonth() >= today.getMonth() &&
-      date.getFullYear() >= today.getFullYear()
-    ) {
+    if (date - today > 0) {
       start.disabled = false;
       _ms = getMS(today, date);
       const timer = convertMs(_ms);
-      time.day.innerText = timer.days;
-      time.hour.innerText = timer.hours;
-      time.min.innerHTML = timer.minutes;
-      time.sec.innerText = timer.seconds;
+      time.day.innerText = setNumberDate(timer.days);
+      time.hour.innerText = setNumberDate(timer.hours);
+      time.min.innerHTML = setNumberDate(timer.minutes);
+      time.sec.innerText = setNumberDate(timer.seconds);
       timer_counter(_ms);
 
       Notiflix.Notify.success("Nice date dude!!");
