@@ -10,10 +10,12 @@ function getRandomHexColor() {
 }
 
 start.addEventListener("click", () => {
+  start.disabled = true;
   second = setInterval(() => {
     document.body.style.backgroundColor = getRandomHexColor();
   }, 1000);
 });
 stop.addEventListener("click", () => {
   clearTimeout(second);
+  start.disabled = false;
 });
